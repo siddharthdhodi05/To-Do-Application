@@ -10,11 +10,19 @@ function App() {
     setTodolist([...todolist, newTodo]);
   };
 
+  const delitem = (index) => {
+    const newarr = [...todolist];  // Copy current todos
+    newarr.splice(index, 1);  // Remove the item at the specified index
+    setTodolist(newarr);  // Update state with the new array
+  };
+
   return (
     <>
       <Header />
       <Input updateList={addTodo} />
-      <Todolist todolist={todolist} />
+      {todolist.map((item, index) => (
+        <Todolist item={item} key={index} del={delitem} index={index} />
+      ))}
     </>
   );
 }
